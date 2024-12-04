@@ -4,10 +4,10 @@
 import os
 
 
-def parseInput() -> list[list[int]]:
+def parseInput(filename: str) -> list[list[int]]:
     lists = [[],[]]
     dir = os.path.dirname(os.path.abspath(__file__))
-    with open(os.path.join(dir, 'input.txt'), 'r') as f:
+    with open(os.path.join(dir, filename), 'r') as f:
         for line in f:
             columns = line.strip().split('   ')
             lists[0].append(int(columns[0]))
@@ -16,12 +16,9 @@ def parseInput() -> list[list[int]]:
 
 
 def partOne() -> int:
-
-    
-    lists = parseInput()
+    lists = parseInput('input.txt')
     lists[0].sort()
     lists[1].sort()
-    
     distance = 0
     for i in range(len(lists[0])):
         distance += abs(lists[0][i] - lists[1][i])
@@ -29,12 +26,10 @@ def partOne() -> int:
     return distance
 
 def partTwo() -> int:
-
-    lists = parseInput()
-
+    lists = parseInput('input.txt')
     score = 0
     for i in range(len(lists[0])):
-        value = lists[0][i];
+        value = lists[0][i]
         freq = lists[1].count(value)
         score += value * freq
 
@@ -46,3 +41,4 @@ if __name__ == '__main__':
     print(f'The solution to part one: {str(solution1)}')
     solution2 = partTwo()
     print(f'The solution to part two: {str(solution2)}')
+    
