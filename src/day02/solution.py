@@ -23,25 +23,16 @@ def getRates(levels: list[int]) -> list[int]:
 
 
 def checkRates(rates: list[int]) -> bool:
-
-    inBounds = 0
-    ascending = 0
-    decending = 0
-    length = len(rates)
-    for i in range(length):
-        rate = abs(rates[i])
-        if rate > 0 and rate <= 3:
-            inBounds += 1
-        if rates[i] > 0:
-            ascending += 1
-        if rates[i] < 0:
-            decending += 1
-
-    allRatesInBounds = (inBounds == length)
-    allRatesAscending = (ascending == length)
-    allRatesDecending = (decending == length)
-
-    return (allRatesInBounds and (allRatesAscending or allRatesDecending))
+    direction = 0
+    for i in range(len(rates)):
+        # Check the magnitude of each change that it is valid
+        magnitude = abs(rates[i])
+        if magnitude == 0 or magnitude > 3:
+            return False
+        # Keep track of the direction of each change
+        # If all rates are in the same direction, the length of direction will be the same as the original
+        direction += (1 if rates[i] > 0 else (-1 if rates[i] < 0 else 0))
+    return (abs(direction) == len(rates))
 
 
 def partOne(reports: list[list[int]]) -> int:
