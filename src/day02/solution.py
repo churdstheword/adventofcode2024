@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python3
 
 import os
@@ -23,16 +22,15 @@ def getRates(levels: list[int]) -> list[int]:
 
 
 def checkRates(rates: list[int]) -> bool:
-    direction = 0
+    rangeChecks, netDirection = 0, 0
     for i in range(len(rates)):
-        # Check the magnitude of each change that it is valid
-        magnitude = abs(rates[i])
-        if magnitude == 0 or magnitude > 3:
-            return False
-        # Keep track of the direction of each change
-        # If all rates are in the same direction, the length of direction will be the same as the original
-        direction += (1 if rates[i] > 0 else (-1 if rates[i] < 0 else 0))
-    return (abs(direction) == len(rates))
+        # Check that the magnitude of each rate is in the accepted range
+        if (abs(rates[i]) > 0 and abs(rates[i]) <= 3):
+            rangeChecks += 1
+        # Track the overall net direction of the all the rates
+        netDirection += (1 if rates[i] > 0 else (-1 if rates[i] < 0 else 0))
+    # If all rates are in range and all rates have the same direction, the rates are safe
+    return (rangeChecks == len(rates)) and (abs(netDirection) == len(rates))
 
 
 def partOne(reports: list[list[int]]) -> int:
@@ -47,7 +45,8 @@ def partOne(reports: list[list[int]]) -> int:
 def partTwo(reports: list[list[int]]) -> int:
     numSafe = 0
     for report in reports:
-        # Evaluate a copy of each report having each copy missing a different item
+        # Evaluate a copy of each report having each copy missing a different
+        # item from the original report.
         # If at least one copy is safe, then the original report is safe
         for i in range(len(report)):
             copy = report.copy()
