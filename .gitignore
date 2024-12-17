@@ -1,1 +1,7 @@
 input.txt
+.vs
+*bin
+*obj
+.idea
+.editorconfig
+*data
