@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -6,8 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <StartAction>Program</StartAction>
-    <StartProgram>$(SolutionDir)Day01/bin/Debug/net8.0/Day01</StartProgram>
-    <StartArguments>$(SolutionDir)Day01/input.txt</StartArguments>
+    <StartProgram>$(SolutionDir)Day02/bin/Debug/net8.0/Day02</StartProgram>
+    <StartArguments>$(SolutionDir)Day02/input.txt</StartArguments>
   </PropertyGroup>
 
 </Project>
